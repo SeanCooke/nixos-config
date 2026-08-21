@@ -1,4 +1,7 @@
 # nixos-config
+
+Wahey!
+
 Collection of configuration files for my personal NixOS laptop, managed as a [Nix flake](https://nixos.wiki/wiki/flakes).
 
 ![Screenshot of laptop desktop](images/desktop.png)
