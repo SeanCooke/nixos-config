@@ -25,6 +25,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit username; };
+            # GNOME rewrites ~/.config/monitors.xml, replacing the symlink
+            # Home Manager owns. Move it aside instead of failing activation.
+            home-manager.backupFileExtension = "hm-bak";
             home-manager.users.${username} = import ./home-manager/home.nix;
           }
         ];

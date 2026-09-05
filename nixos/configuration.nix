@@ -42,6 +42,16 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # The kernel virtual console (Ctrl+Alt+F3, and any boot-time output) is drawn
+  # by the kernel, not the compositor, so the display scale in monitors.xml
+  # cannot reach it. Its default font is a fixed 8x16 bitmap; Terminus 14x28 is
+  # the size closest to that scale. Terminus only resolves if its package is
+  # listed here too, as kbd does not ship it.
+  console = {
+    font = "ter-i28b";
+    packages = [ pkgs.terminus_font ];
+  };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -149,6 +159,14 @@
     zoom-us
   ];
 
+  # Runs Chromium and Electron applications (Brave, VS Code, Slack, Spotify) as
+  # native Wayland clients rather than under Xwayland. They then receive the
+  # display scale from monitors.xml directly and render at it, which is what
+  # lets them be sized by that one setting instead of per-application zoom
+  # flags. Without this they are drawn at scale 1 and stretched, so text in
+  # them looks soft.
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   # Setting default command line editor to vim.
   programs.vim = {
     enable = true;
@@ -187,6 +205,21 @@
       settings = {
         "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";
+        };
+        # Xwayland clients are drawn at scale 1 and stretched by the compositor,
+        # which leaves them blurry under the fractional scale in monitors.xml.
+        # This asks them to render at the real scale instead. Only affects apps
+        # that are still on X11; the Chromium and Electron ones are moved to
+        # native Wayland by NIXOS_OZONE_WL above.
+        "org/gnome/mutter" = {
+          experimental-features = [ "xwayland-native-scaling" ];
+        };
+        # Console sizes its text from the monospace font's point size, which
+        # the display scale in monitors.xml magnifies along with everything
+        # else. That still leaves it smaller than is comfortable to read, so
+        # scale its font up on top of the display scale.
+        "org/gnome/Console" = {
+          font-scale = 1.5;
         };
       };
     }
