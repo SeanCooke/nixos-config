@@ -173,8 +173,8 @@ in
     envExtra = unsetSshAskpass;
   };
 
-  # Configuring the GNOME dock.
   dconf.settings = {
+    # Configuring the GNOME dock.
     "org/gnome/shell" = {
       favorite-apps = [
         "brave-browser.desktop"
@@ -187,6 +187,14 @@ in
     # Increasing the Console font size by a multiplier.
     "org/gnome/Console" = {
       font-scale = 1.5;
+    };
+
+    # Configuring desktop background.
+    "org/gnome/desktop/background" = {
+      picture-uri-dark = "file://${pkgs.fetchurl {
+        url = "https://www.wallpaperinhd.net/wp-content/uploads/2018/11/Star-Wars-Wallpaper-099.jpg";
+        hash = "sha256-vq15sLrZbd6uv7PPJsVtcC7iXCMq1AedaVrwYZTc0Jw=";
+      }}";
     };
   };
 
