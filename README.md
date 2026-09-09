@@ -1,8 +1,6 @@
 # nixos-config
 Collection of configuration files that declaratively define applications and settings on my NixOS laptop, managed as a [Nix flake](https://wiki.nixos.org/wiki/Flakes).
 
-![Screenshot of laptop desktop](images/desktop.png)
-
 ## Layout
 - `flake.nix` — Entrypoint. Defines the `laptop` system and wires in [Home Manager](https://github.com/nix-community/home-manager) as a NixOS module.
 - `flake.lock` — Pinned revisions of `nixpkgs` and `home-manager`.
