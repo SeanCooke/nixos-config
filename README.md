@@ -39,9 +39,9 @@ A flake only sees files that git tracks. Editing a file already in the repo is e
 ## Keyboard Shortcuts
 | Application | Shortcut | Action |
 | --- | --- | --- |
-| Spotify | <kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>p</kbd> | Play / pause |
-| Spotify | <kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>n</kbd> | Next track |
-| Spotify | <kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>b</kbd> | Previous track |
+| Spotify | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>Space</kbd> | Play / pause |
+| Spotify | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>→</kbd> | Next track |
+| Spotify | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>←</kbd> | Previous track |
 
 ## Manual Configuration
 ### NordVPN

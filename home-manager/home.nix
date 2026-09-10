@@ -208,17 +208,17 @@ in
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-play-pause" = {
       name = "Spotify play/pause";
       command = "${pkgs.playerctl}/bin/playerctl --player=spotify play-pause";
-      binding = "<Super><Alt>p";
+      binding = "<Control><Super>space";
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-next" = {
       name = "Spotify next track";
       command = "${pkgs.playerctl}/bin/playerctl --player=spotify next";
-      binding = "<Super><Alt>n";
+      binding = "<Control><Super>Right";
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-previous" = {
       name = "Spotify previous track";
       command = "${pkgs.playerctl}/bin/playerctl --player=spotify previous";
-      binding = "<Super><Alt>b";
+      binding = "<Control><Super>Left";
     };
   };
 
