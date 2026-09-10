@@ -36,6 +36,13 @@ sudo nixos-rebuild switch --flake .#laptop
 
 A flake only sees files that git tracks. Editing a file already in the repo is enough, but a file you add must be `git add`ed before `nixos-rebuild` will see it.
 
+## Keyboard Shortcuts
+| Application | Shortcut | Action |
+| --- | --- | --- |
+| Spotify | <kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>p</kbd> | Play / pause |
+| Spotify | <kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>n</kbd> | Next track |
+| Spotify | <kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>b</kbd> | Previous track |
+
 ## Manual Configuration
 ### NordVPN
 NordVPN is a paid service and requires an OpenVPN config file (`.ovpn`) that must be downloaded from the [NordVPN dashboard](https://my.nordaccount.com/) to access the service.  The `networkmanager-openvpn` plugin enabled in `nixos/configuration.nix` lets you import NordVPN profiles and toggle them from the GNOME system menu.
