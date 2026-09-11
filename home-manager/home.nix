@@ -196,6 +196,13 @@ in
         hash = "sha256-vq15sLrZbd6uv7PPJsVtcC7iXCMq1AedaVrwYZTc0Jw=";
       }}";
     };
+
+    # Media keyboard shortcuts.
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      play = [ "<Control><Super>space" ];
+      next = [ "<Control><Super>Right" ];
+      previous = [ "<Control><Super>Left" ];
+    };
   };
 
 }
