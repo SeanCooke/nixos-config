@@ -37,11 +37,11 @@ sudo nixos-rebuild switch --flake .#laptop
 A flake only sees files that git tracks. Editing a file already in the repo is enough, but a file you add must be `git add`ed before `nixos-rebuild` will see it.
 
 ## Keyboard Shortcuts
-| Application | Shortcut | Action |
-| --- | --- | --- |
-| Spotify | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>Space</kbd> | Play / pause |
-| Spotify | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>→</kbd> | Next track |
-| Spotify | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>←</kbd> | Previous track |
+| Action | Shortcut |
+| --- | --- |
+| Media play / pause | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>Space</kbd> |
+| Media skip track | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>→</kbd> |
+| Media previous track | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>←</kbd> |
 
 ## Manual Configuration
 ### NordVPN

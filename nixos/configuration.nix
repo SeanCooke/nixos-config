@@ -127,7 +127,6 @@
       ];
     })
     libreoffice
-    playerctl
     (python3.withPackages (ps: with ps; [
       jupyter
       numpy

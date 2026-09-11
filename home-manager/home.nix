@@ -197,28 +197,12 @@ in
       }}";
     };
 
-    # Spotify keyboard shortcuts.
+    # Media keyboard shortcuts
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-play-pause/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-next/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-previous/"
-      ];
-    };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-play-pause" = {
-      name = "Spotify play/pause";
-      command = "${pkgs.playerctl}/bin/playerctl --player=spotify play-pause";
-      binding = "<Control><Super>space";
-    };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-next" = {
-      name = "Spotify next track";
-      command = "${pkgs.playerctl}/bin/playerctl --player=spotify next";
-      binding = "<Control><Super>Right";
-    };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-previous" = {
-      name = "Spotify previous track";
-      command = "${pkgs.playerctl}/bin/playerctl --player=spotify previous";
-      binding = "<Control><Super>Left";
+      custom-keybindings = [ ];
+      play = [ "<Control><Super>space" ];
+      next = [ "<Control><Super>Right" ];
+      previous = [ "<Control><Super>Left" ];
     };
   };
 
