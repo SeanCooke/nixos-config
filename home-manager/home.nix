@@ -197,9 +197,8 @@ in
       }}";
     };
 
-    # Media keyboard shortcuts
+    # Media keyboard shortcuts.
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [ ];
       play = [ "<Control><Super>space" ];
       next = [ "<Control><Super>Right" ];
       previous = [ "<Control><Super>Left" ];
