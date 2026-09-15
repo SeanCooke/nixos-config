@@ -22,6 +22,10 @@ let
       settings="${target}"
       mkdir -p "$(dirname "$settings")"
 
+      # Removing comments from settings file so we can parse with jq.
+      ${pkgs.perl}/bin/perl -0777 -i -pe \
+        's{("(?:\\.|[^"\\])*")|//[^\n]*|/\*.*?\*/}{$1}gs' "$settings" 2>/dev/null
+
       # Replaces a missing or malformed settings file with {}.
       if ! ${pkgs.jq}/bin/jq -e -s 'length == 1 and (.[0] | type == "object")' \
            "$settings" > /dev/null 2>&1; then
