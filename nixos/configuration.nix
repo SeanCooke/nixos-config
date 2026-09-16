@@ -100,6 +100,19 @@
     ];
   };
 
+  # Configuring rebuilds without password authentication so Claude can rebuild the system.
+  security.sudo.extraRules = [
+    {
+      users = [ username ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild switch --flake .\\#laptop";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
   # Configuring profile picture.
   system.activationScripts.profilePicture.text = ''
     mkdir -p -m 0700 /var/lib/AccountsService/users
