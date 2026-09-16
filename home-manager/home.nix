@@ -121,12 +121,6 @@ in
     appSettingsFile = "brave/settings.json";
     target = "$HOME/.config/BraveSoftware/Brave-Browser/Default/Preferences";
   };
-  # Remove cached top sites/shortcuts so Brave can't repopulate the grid.
-  home.activation.braveClearTopSites =
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    profile="$HOME/.config/BraveSoftware/Brave-Browser/Default"
-    rm -rf "$profile/Top Sites" "$profile/Shortcuts"
-  '';
 
   # Configuring Claude Code.
   home.activation.claudeCodeSettings = mergeAppSettings {
