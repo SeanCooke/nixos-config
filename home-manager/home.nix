@@ -115,6 +115,19 @@ in
     ".config/monitors.xml".source = ./monitors.xml;
   };
 
+  # Configuring Brave.
+  home.activation.braveSettings = mergeAppSettings {
+    appName = "Brave";
+    appSettingsFile = "brave/preferences.json";
+    target = "$HOME/.config/BraveSoftware/Brave-Browser/Default/Preferences";
+  };
+  # Remove cached top sites/shortcuts so Brave can't repopulate the grid.
+  home.activation.braveClearTopSites =
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    profile="$HOME/.config/BraveSoftware/Brave-Browser/Default"
+    rm -rf "$profile/Top Sites" "$profile/Shortcuts"
+  '';
+
   # Configuring Claude Code.
   home.activation.claudeCodeSettings = mergeAppSettings {
     appName = "Claude Code";
@@ -128,20 +141,6 @@ in
     appSettingsFile = "visual-studio-code/settings.json";
     target = "$HOME/.config/Code/User/settings.json";
   };
-
-  # Configuring Brave.
-  home.activation.braveSettings = mergeAppSettings {
-    appName = "Brave";
-    appSettingsFile = "brave/preferences.json";
-    target = "$HOME/.config/BraveSoftware/Brave-Browser/Default/Preferences";
-  };
-
-  # Remove cached top sites/shortcuts so Brave can't repopulate the grid.
-  home.activation.braveClearTopSites =
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    profile="$HOME/.config/BraveSoftware/Brave-Browser/Default"
-    rm -rf "$profile/Top Sites" "$profile/Shortcuts"
-  '';
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
