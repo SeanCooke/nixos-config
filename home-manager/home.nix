@@ -4,6 +4,23 @@ let
   # Requiring git authentication from command line only.
   unsetSshAskpass = "unset SSH_ASKPASS";
 
+  # Converts JSONC into plain JSON.
+  jsoncToJson = pkgs.writers.writePython3Bin "jsonc-to-json" {
+    libraries = [ pkgs.python3Packages.json5 ];
+  } ''
+    import json
+    import json5
+    import sys
+
+    with open(sys.argv[1]) as settings:
+        parsed = json5.load(settings)
+
+    if not isinstance(parsed, dict):
+        sys.exit("Input is not a JSON object.")
+
+    json.dump(parsed, sys.stdout)
+  '';
+
   # Merging this repo's settings into the application's settings file.  Merge
   # used rather than replace as the application also writes to this settings
   # file and we don't want to overwrite its settings.
@@ -22,17 +39,18 @@ let
       settings="${target}"
       mkdir -p "$(dirname "$settings")"
 
-      # Replaces a missing or malformed settings file with {}.
-      if ! ${pkgs.jq}/bin/jq -e -s 'length == 1 and (.[0] | type == "object")' \
-           "$settings" > /dev/null 2>&1; then
-        echo '{}' > "$settings"
+      # $settings might have comments so we explicitly convert to JSON
+      # parsable by jq.
+      json="$(mktemp)"
+      if ! ${jsoncToJson}/bin/jsonc-to-json "$settings" > "$json" 2>/dev/null; then
+        echo '{}' > "$json"
       fi
 
       # Merge ${relativeSource} into the settings file via a scratch file,
       # giving priority to keys in ${relativeSource}. If the merge succeeds,
       # replace the settings file with the scratch file.
       tmp="$(mktemp "$settings.XXXXXX")"
-      if ${pkgs.jq}/bin/jq -s '.[0] * .[1]' "$settings" ${source} > "$tmp"; then
+      if ${pkgs.jq}/bin/jq -s '.[0] * .[1]' "$json" ${source} > "$tmp"; then
         mv "$tmp" "$settings"
       else
         rm -f "$tmp"
@@ -40,6 +58,7 @@ let
           "Unable to import ${appName} settings from ${relativeSource}." \
           "${appName} will continue to use the settings in ${target}."
       fi
+      rm -f "$json"
     '';
 in
 {
