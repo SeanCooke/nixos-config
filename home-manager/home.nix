@@ -118,7 +118,7 @@ in
   # Configuring Brave.
   home.activation.braveSettings = mergeAppSettings {
     appName = "Brave";
-    appSettingsFile = "brave/preferences.json";
+    appSettingsFile = "brave/settings.json";
     target = "$HOME/.config/BraveSoftware/Brave-Browser/Default/Preferences";
   };
   # Remove cached top sites/shortcuts so Brave can't repopulate the grid.
