@@ -129,28 +129,18 @@ in
     target = "$HOME/.config/Code/User/settings.json";
   };
 
-  # Keep Brave's new tab page clean: force-disable top sites and wipe their
-  # backing DBs.
-  home.activation.braveHideTopSites =
+  # Configuring Brave.
+  home.activation.braveSettings = mergeAppSettings {
+    appName = "Brave";
+    appSettingsFile = "brave/preferences.json";
+    target = "$HOME/.config/BraveSoftware/Brave-Browser/Default/Preferences";
+  };
+
+  # Remove cached top sites/shortcuts so Brave can't repopulate the grid.
+  home.activation.braveClearTopSites =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    pref="$HOME/.config/BraveSoftware/Brave-Browser/Default/Preferences"
-    top_sites="$HOME/.config/BraveSoftware/Brave-Browser/Default/Top Sites"
-    shortcuts="$HOME/.config/BraveSoftware/Brave-Browser/Default/Shortcuts"
-
-    if [ -f "$pref" ]; then
-      tmp="$(mktemp)"
-      ${pkgs.jq}/bin/jq '
-        .brave.new_tab_page.show_top_sites = false
-        | .brave.new_tab_page.show_stats = false
-        | .ntp.shortcuts_visible = false
-        | .ntp.shortcust_visible = false
-        | .brave.brave_search["show-ntp-search"] = false
-        | .brave.shields.stats_badge_visible = false
-      ' "$pref" > "$tmp" && mv "$tmp" "$pref"
-    fi
-
-    # Remove cached top sites/shortcuts so Brave can't repopulate the grid.
-    rm -rf "$top_sites" "$shortcuts"
+    profile="$HOME/.config/BraveSoftware/Brave-Browser/Default"
+    rm -rf "$profile/Top Sites" "$profile/Shortcuts"
   '';
 
   # Home Manager can also manage your environment variables through

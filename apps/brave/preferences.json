@@ -1,0 +1,17 @@
+{
+  "brave": {
+    "brave_search": {
+      "show-ntp-search": false
+    },
+    "new_tab_page": {
+      "show_stats": false,
+      "show_top_sites": false
+    },
+    "shields": {
+      "stats_badge_visible": false
+    }
+  },
+  "ntp": {
+    "shortcuts_visible": false
+  }
+}
