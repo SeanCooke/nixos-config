@@ -13,7 +13,12 @@ let
     import sys
 
     with open(sys.argv[1]) as settings:
-        json.dump(json5.load(settings), sys.stdout)
+        parsed = json5.load(settings)
+
+    if not isinstance(parsed, dict):
+        sys.exit("Input is not a JSON object.")
+
+    json.dump(parsed, sys.stdout)
   '';
 
   # Merging this repo's settings into the application's settings file.  Merge
