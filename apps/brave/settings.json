@@ -4,14 +4,14 @@
       "show-ntp-search": false
     },
     "new_tab_page": {
-      "show_stats": false,
-      "show_top_sites": false
+      "show_stats": false
     },
     "shields": {
       "stats_badge_visible": false
     }
   },
   "ntp": {
+    "shortcust_visible": false,
     "shortcuts_visible": false
   }
 }
