@@ -43,7 +43,9 @@ let
       # parsable by jq.
       json="$(mktemp)"
       if ! ${jsoncToJson}/bin/jsonc-to-json "$settings" > "$json" 2>/dev/null; then
-        echo '{}' > "$json"
+        # If $settings can't be parsed, keep $settings by letting the merge
+        # fail gracefully below.
+        [ -e "$settings" ] || echo '{}' > "$json"
       fi
 
       # Merge ${relativeSource} into the settings file via a scratch file,
