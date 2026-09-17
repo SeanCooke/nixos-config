@@ -196,10 +196,10 @@ in
     # Configuring the GNOME dock.
     "org/gnome/shell" = {
       favorite-apps = [
-        "brave-browser.desktop"
-        "org.gnome.Geary.desktop"
-        "spotify.desktop"
         "org.gnome.Nautilus.desktop"
+        "brave-browser.desktop"
+        "spotify.desktop"
+        "org.gnome.Console.desktop"
       ];
     };
 
