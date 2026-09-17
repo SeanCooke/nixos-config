@@ -188,7 +188,6 @@ in
       ];
 
       # Enabling desktop icons.
-      disable-user-extensions = false;
       enabled-extensions = [ "ding@rastersoft.com" ];
     };
 
