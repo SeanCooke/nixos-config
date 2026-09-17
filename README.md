@@ -19,13 +19,13 @@ nix-shell -p git
 git clone https://github.com/SeanCooke/nixos-config
 ```
 
-2. Change into the repo and run [`install.sh`](https://github.com/SeanCooke/nixos-config/blob/main/install.sh). It replaces the tracked hardware scan, enables flakes, and builds the system.
+2. Change into the repo and run [`install.sh`](https://github.com/SeanCooke/nixos-config/blob/main/install.sh). It replaces the tracked hardware scan, enables flakes, builds the system, and logs you out.
 ```bash
 cd ~/nixos-config
 ./install.sh
 ```
 
-Once this configuration is active, flakes are enabled system wide by `nixos/configuration.nix` and later rebuilds no longer need `NIX_CONFIG`.
+After logging back in, flakes are enabled system wide by `nixos/configuration.nix` and later rebuilds no longer need `NIX_CONFIG`.
 
 ## Rebuild
 After editing any file in this repo.
