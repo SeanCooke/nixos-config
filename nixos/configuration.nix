@@ -132,6 +132,7 @@
     claude-code
     gh
     git
+    gnomeExtensions.desktop-icons-ng-ding
     keepassxc
     openvpn
     (pkgs.brave.override {
