@@ -178,14 +178,17 @@ in
   };
 
   dconf.settings = {
-    # Configuring the GNOME dock.
     "org/gnome/shell" = {
+      # Configuring the GNOME dock.
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
         "brave-browser.desktop"
         "spotify.desktop"
         "org.gnome.Console.desktop"
       ];
+
+      # Enabling desktop icons.
+      enabled-extensions = [ "ding@rastersoft.com" ];
     };
 
     # Increasing the Console font size by a multiplier.
@@ -206,6 +209,11 @@ in
       play = [ "<Control><Super>space" ];
       next = [ "<Control><Super>Right" ];
       previous = [ "<Control><Super>Left" ];
+    };
+
+    # Showing the desktop.
+    "org/gnome/desktop/wm/keybindings" = {
+      show-desktop = [ "<Super>Escape" ];
     };
   };
 
