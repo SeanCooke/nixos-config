@@ -43,7 +43,9 @@ let
       # parsable by jq.
       json="$(mktemp)"
       if ! ${jsoncToJson}/bin/jsonc-to-json "$settings" > "$json" 2>/dev/null; then
-        echo '{}' > "$json"
+        # If $settings can't be parsed, keep $settings by letting the merge
+        # fail gracefully below.
+        [ -e "$settings" ] || echo '{}' > "$json"
       fi
 
       # Merge ${relativeSource} into the settings file via a scratch file,
@@ -115,6 +117,13 @@ in
     ".config/monitors.xml".source = ./monitors.xml;
   };
 
+  # Configuring Brave.
+  home.activation.braveSettings = mergeAppSettings {
+    appName = "Brave";
+    appSettingsFile = "brave/settings.json";
+    target = "$HOME/.config/BraveSoftware/Brave-Browser/Default/Preferences";
+  };
+
   # Configuring Claude Code.
   home.activation.claudeCodeSettings = mergeAppSettings {
     appName = "Claude Code";
@@ -128,30 +137,6 @@ in
     appSettingsFile = "visual-studio-code/settings.json";
     target = "$HOME/.config/Code/User/settings.json";
   };
-
-  # Keep Brave's new tab page clean: force-disable top sites and wipe their
-  # backing DBs.
-  home.activation.braveHideTopSites =
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    pref="$HOME/.config/BraveSoftware/Brave-Browser/Default/Preferences"
-    top_sites="$HOME/.config/BraveSoftware/Brave-Browser/Default/Top Sites"
-    shortcuts="$HOME/.config/BraveSoftware/Brave-Browser/Default/Shortcuts"
-
-    if [ -f "$pref" ]; then
-      tmp="$(mktemp)"
-      ${pkgs.jq}/bin/jq '
-        .brave.new_tab_page.show_top_sites = false
-        | .brave.new_tab_page.show_stats = false
-        | .ntp.shortcuts_visible = false
-        | .ntp.shortcust_visible = false
-        | .brave.brave_search["show-ntp-search"] = false
-        | .brave.shields.stats_badge_visible = false
-      ' "$pref" > "$tmp" && mv "$tmp" "$pref"
-    fi
-
-    # Remove cached top sites/shortcuts so Brave can't repopulate the grid.
-    rm -rf "$top_sites" "$shortcuts"
-  '';
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
