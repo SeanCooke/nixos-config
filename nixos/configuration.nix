@@ -170,7 +170,7 @@
     zoom-us
   ];
 
-  # Aliasing xdg-open to open.
+  # Aliasing open to xdg-open.
   environment.shellAliases.open = "xdg-open";
 
   # Setting default command line editor to vim.
