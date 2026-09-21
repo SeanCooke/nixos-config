@@ -206,7 +206,7 @@ in
 
     # Media keyboard shortcuts.
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      play = [ "<Control><Super>space" ];
+      play = [ "<Control><Super>space" "Pause" ];
       next = [ "<Control><Super>Right" ];
       previous = [ "<Control><Super>Left" ];
     };
