@@ -42,7 +42,7 @@ A flake only sees files that git tracks. Editing a file already in the repo is e
 | Action | Shortcut |
 | --- | --- |
 | Show desktop | <kbd>Super</kbd>+<kbd>Esc</kbd> |
-| Media play / pause | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>Space</kbd> |
+| Media play / pause | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>Space</kbd> or <kbd>Pause</kbd> |
 | Media next track | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>→</kbd> |
 | Media previous track | <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>←</kbd> |
 
