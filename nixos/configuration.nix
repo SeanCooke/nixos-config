@@ -133,6 +133,7 @@
     gh
     git
     gnomeExtensions.desktop-icons-ng-ding
+    google-chrome
     keepassxc
     openvpn
     (pkgs.brave.override {
