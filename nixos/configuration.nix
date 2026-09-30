@@ -205,11 +205,11 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  # Enable GNOME Dark Mode.
   programs.dconf.enable = true;
   programs.dconf.profiles.user.databases = [
     {
       settings = {
+        # Enable GNOME Dark Mode.
         "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";
         };
