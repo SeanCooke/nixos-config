@@ -61,6 +61,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable SANE to scan documents.
+  hardware.sane.enable = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -94,7 +97,7 @@
     isNormalUser = true;
     description = fullName;
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "lp" "networkmanager" "scanner" "wheel" ];
     packages = with pkgs; [
     #  thunderbird
     ];
