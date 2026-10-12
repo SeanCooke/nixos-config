@@ -97,7 +97,7 @@
     isNormalUser = true;
     description = fullName;
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
+    extraGroups = [ "lp" "networkmanager" "scanner" "wheel" ];
     packages = with pkgs; [
     #  thunderbird
     ];
