@@ -185,16 +185,13 @@
   # Setting default shell to zsh.
   programs.zsh.enable = true;
 
-  xdg.mime = {
+  xdg.mime.defaultApplications = {
     # Setting default HTML editor to Visual Studio Code.
-    addedAssociations."text/html" = "code.desktop";
+    "text/html" = "code.desktop";
 
     # Setting default web browser to Brave.
-    defaultApplications = {
-      "text/html"              = "code.desktop";
-      "x-scheme-handler/http"  = "brave-browser.desktop";
-      "x-scheme-handler/https" = "brave-browser.desktop";
-    };
+    "x-scheme-handler/http" = "brave-browser.desktop";
+    "x-scheme-handler/https" = "brave-browser.desktop";
   };
 
   # Configuring Brave policies.
