@@ -8,10 +8,10 @@ steps below:
 
 1. Fork the repo.
 2. Make your changes and push changes to your fork.
-3. Create a PR into [nixos-config](https://github.com/SeanCooke/nixos-config)
-from your fork.
-4. Sean will consider your PR and will either merge or
-give a reason why your change was not merged.
+3. Create a PR into
+[nixos-config](https://github.com/SeanCooke/nixos-config/pulls) from your fork.
+4. Sean will consider your PR and will either merge or give a reason why your
+PR was not merged.
 
 An example of a PR from an external user into this repo can be found
 [here](https://github.com/SeanCooke/nixos-config/pull/27).
