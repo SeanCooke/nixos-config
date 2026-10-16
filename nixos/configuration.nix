@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, username, fullName, ... }:
+{ config, fullName, lib, pkgs, username, ... }:
+
+let
+  # Setting gutenprint version in variable.
+  gutenprintVersion = lib.versions.majorMinor (lib.getVersion pkgs.gutenprint);
+in
 
 {
   # Bootloader.
@@ -67,8 +72,8 @@
     {
       name = "MG2400-series";
       description = "Canon Pixma MG2400 series";
-      deviceUri = "usb://Canon/MG2400%20series?serial=B8B355&interface=1";
-      model = "gutenprint.5.3://bjc-MG2400-series/expert";
+      deviceUri = "usb://Canon/MG2400%20series";
+      model = "gutenprint.${gutenprintVersion}://bjc-MG2400-series/expert";
       ppdOptions = {
         PageSize = "Letter";
       };
