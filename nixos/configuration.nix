@@ -61,6 +61,21 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable printer drivers to print documents.
+  services.printing.drivers = with pkgs; [ gutenprint ];
+  hardware.printers.ensurePrinters = [
+    {
+      name = "MG2400-series";
+      description = "Canon Pixma MG2400 series";
+      deviceUri = "usb://Canon/MG2400%20series?serial=B8B355&interface=1";
+      model = "gutenprint.5.3://bjc-MG2400-series/expert";
+      ppdOptions = {
+        PageSize = "Letter";
+      };
+    }
+  ];
+  hardware.printers.ensureDefaultPrinter = "MG2400-series";
+
   # Enable SANE to scan documents.
   hardware.sane.enable = true;
 
