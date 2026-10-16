@@ -1,7 +1,87 @@
 <monitors version="2">
+  <!--
+    Three monitors: the portrait external (DP-1) to the left of everything, the
+    landscape external (DP-2) directly above the laptop, and the laptop
+    (eDP-1) at the bottom.
+
+    Logical coordinates, derived from each monitor's mode divided by its scale:
+
+      DP-1    1080x1920 at (0, 0)          portrait, rotated clockwise
+      DP-2    1920x1080 at (1080, 0)       landscape, above the laptop
+      eDP-1   1536x960  at (1080, 1080)    2560x1600 at a scale of 1.6666...
+
+    GNOME requires every monitor to touch another with no overlaps, so the
+    external monitors are left aligned with the laptop rather than centered
+    over it.
+  -->
   <configuration>
     <layoutmode>logical</layoutmode>
     <logicalmonitor>
+      <x>0</x>
+      <y>0</y>
+      <scale>1</scale>
+      <transform>
+        <rotation>left</rotation>
+      </transform>
+      <monitor>
+        <monitorspec>
+          <connector>DP-1</connector>
+          <vendor>VSC</vendor>
+          <product>VG2239 Series</product>
+          <serial>UBW160203986</serial>
+        </monitorspec>
+        <mode>
+          <width>1920</width>
+          <height>1080</height>
+          <rate>60.000</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>1080</x>
+      <y>0</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-2</connector>
+          <vendor>VSC</vendor>
+          <product>VG2239 Series</product>
+          <serial>UBW160203988</serial>
+        </monitorspec>
+        <mode>
+          <width>1920</width>
+          <height>1080</height>
+          <rate>60.000</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>1080</x>
+      <y>1080</y>
+      <scale>1.6666666666666667</scale>
+      <primary>yes</primary>
+      <monitor>
+        <monitorspec>
+          <connector>eDP-1</connector>
+          <vendor>BOE</vendor>
+          <product>0x0ac1</product>
+          <serial>0x00000000</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1600</height>
+          <rate>120.001</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+  </configuration>
+
+  <!-- The laptop monitor on its own. -->
+  <configuration>
+    <layoutmode>logical</layoutmode>
+    <logicalmonitor>
+      <x>0</x>
+      <y>0</y>
       <scale>1.6666666666666667</scale>
       <primary>yes</primary>
       <monitor>

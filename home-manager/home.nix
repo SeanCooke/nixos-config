@@ -113,7 +113,7 @@ in
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-    # Configuring global zoom.
+    # Configuring displays.
     ".config/monitors.xml".source = ./monitors.xml;
   };
 

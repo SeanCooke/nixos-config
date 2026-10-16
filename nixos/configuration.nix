@@ -54,6 +54,12 @@ in
   services.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
 
+  # Getting login screen monitor configuration from home-manager/monitors.xml.
+  systemd.tmpfiles.rules = [
+    "d /run/gdm/.config 0711 gdm gdm - -"
+    "L+ /run/gdm/.config/monitors.xml - - - - ${./../home-manager/monitors.xml}"
+  ];
+
   # Removing default Web application since we use Brave.
   environment.gnome.excludePackages = with pkgs; [ epiphany ];
 
