@@ -113,8 +113,8 @@ in
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-    # Configuring global zoom.
-    ".config/monitors.xml".source = ./monitors.xml;
+    # Configuring displays.
+    ".config/monitors.xml".source = import ./monitors.nix { inherit lib pkgs; };
   };
 
   # Configuring Brave.

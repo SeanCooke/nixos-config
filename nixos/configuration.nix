@@ -7,6 +7,9 @@
 let
   # Setting gutenprint version in variable.
   gutenprintVersion = lib.versions.majorMinor (lib.getVersion pkgs.gutenprint);
+
+  # Configuring displays.
+  monitorsXml = import ./../home-manager/monitors.nix { inherit lib pkgs; };
 in
 
 {
@@ -53,6 +56,12 @@ in
   # Enable the GNOME Desktop Environment.
   services.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
+
+  # Getting login screen monitor configuration from home-manager/monitors.nix.
+  systemd.tmpfiles.rules = [
+    "d /run/gdm/.config 0711 gdm gdm - -"
+    "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsXml}"
+  ];
 
   # Removing default Web application since we use Brave.
   environment.gnome.excludePackages = with pkgs; [ epiphany ];
