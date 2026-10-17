@@ -114,7 +114,7 @@ in
     # '';
 
     # Configuring displays.
-    ".config/monitors.xml".source = ./monitors.xml;
+    ".config/monitors.xml".source = import ./monitors.nix { inherit lib pkgs; };
   };
 
   # Configuring Brave.
