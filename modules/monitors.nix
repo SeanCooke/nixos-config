@@ -124,7 +124,7 @@ let
     ++ map
       (c: configuration [
         { x = 0; y = 0; connector = c; monitor = portrait; }
-        (dockedLaptop { x = 1080; y = 1080; })
+        (dockedLaptop { x = 1080; y = 960; })
       ])
       connectors
 
