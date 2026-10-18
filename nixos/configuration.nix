@@ -54,7 +54,7 @@ in
   services.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
 
-  # Getting login screen monitor configuration from modules/monitors.nix.
+  # Configuring login screen monitor configuration from modules/monitors.nix.
   systemd.tmpfiles.rules = [
     "d /run/gdm/.config 0711 gdm gdm - -"
     "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsXml}"
