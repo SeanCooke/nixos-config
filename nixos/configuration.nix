@@ -2,14 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, fullName, lib, pkgs, username, ... }:
+{ config, fullName, lib, monitorsXml, pkgs, username, ... }:
 
 let
   # Setting gutenprint version in variable.
   gutenprintVersion = lib.versions.majorMinor (lib.getVersion pkgs.gutenprint);
-
-  # Configuring displays.
-  monitorsXml = import ./../home-manager/monitors.nix { inherit lib pkgs; };
 in
 
 {
@@ -57,7 +54,7 @@ in
   services.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
 
-  # Getting login screen monitor configuration from home-manager/monitors.nix.
+  # Getting login screen monitor configuration from modules/monitors.nix.
   systemd.tmpfiles.rules = [
     "d /run/gdm/.config 0711 gdm gdm - -"
     "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsXml}"

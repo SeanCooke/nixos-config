@@ -1,4 +1,4 @@
-{ config, pkgs, lib, username, ... }:
+{ config, pkgs, lib, monitorsXml, username, ... }:
 
 let
   # Requiring git authentication from command line only.
@@ -114,7 +114,7 @@ in
     # '';
 
     # Configuring displays.
-    ".config/monitors.xml".source = import ./monitors.nix { inherit lib pkgs; };
+    ".config/monitors.xml".source = monitorsXml;
   };
 
   # Configuring Brave.

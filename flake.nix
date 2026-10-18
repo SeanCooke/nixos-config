@@ -12,7 +12,14 @@
       system = "x86_64-linux";
       username = "scooke";
       fullName = "Sean Cooke";
-      specialArgs = { inherit username fullName; };
+
+      # Configuring displays.
+      monitorsXml = import ./modules/monitors.nix {
+        inherit (nixpkgs) lib;
+        pkgs = nixpkgs.legacyPackages.${system};
+      };
+
+      specialArgs = { inherit username fullName monitorsXml; };
     in {
       nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
@@ -24,7 +31,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit username; };
+            home-manager.extraSpecialArgs = { inherit username monitorsXml; };
             home-manager.users.${username} = import ./home-manager/home.nix;
           }
         ];
