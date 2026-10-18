@@ -12,13 +12,10 @@
       system = "x86_64-linux";
       username = "scooke";
       fullName = "Sean Cooke";
-
-      # Configuring displays.
       monitorsXml = import ./modules/monitors.nix {
         inherit (nixpkgs) lib;
         pkgs = nixpkgs.legacyPackages.${system};
       };
-
       specialArgs = { inherit username fullName monitorsXml; };
     in {
       nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
