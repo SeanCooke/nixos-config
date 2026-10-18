@@ -14,5 +14,8 @@
   "ntp": {
     "shortcust_visible": false,
     "shortcuts_visible": false
+  },
+  "tab_search": {
+    "pinned_to_tabstrip": false
   }
 }
