@@ -84,7 +84,8 @@ let
       "    </logicalmonitor>"
     ];
 
-  # Rendering a <configuration> from a list of logicalMonitor arguments.
+  # Generating <logicalmonitor>s from arguments and wrapping them in a
+  # <configuration> block.
   configuration = logicalMonitors:
     [
       "  <configuration>"
