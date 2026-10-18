@@ -19,6 +19,7 @@
         modules = [
           ./nixos/configuration.nix
           ./nixos/hardware-configuration.nix
+          ./modules/monitors.nix
           { networking.hostName = "laptop"; }
           home-manager.nixosModules.home-manager
           {
