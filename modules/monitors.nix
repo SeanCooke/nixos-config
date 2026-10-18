@@ -102,17 +102,16 @@ let
     monitor = laptop;
   };
 
-  # Every ordered pair of distinct connectors, for the portrait and the
-  # landscape monitor respectively.
+  # Enumerating every way the portrait and landscape monitors could be plugged
+  # in.
   connectorPairs = lib.concatMap
     (portraitConnector: map
       (landscapeConnector: { inherit portraitConnector landscapeConnector; })
       (lib.filter (c: c != portraitConnector) connectors))
     connectors;
 
-  # GNOME requires every monitor to touch another one with no overlaps, so the
-  # external monitors are left aligned with the laptop rather than centred over
-  # it. The laptop keeps the same place in every layout that includes it.
+  # Organizing monitors the same way regardless of what ports they are plugged
+  # in to, by enumerating a configuration for every possible assignment.
   configurations =
     # The laptop on its own.
     [
@@ -155,13 +154,13 @@ let
 in
 
 {
-  # Giving the login screen the layout by linking the file into GDM's home.
+  # Giving the login screen monitors.xml.
   systemd.tmpfiles.rules = [
     "d /run/gdm/.config 0711 gdm gdm - -"
     "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsXml}"
   ];
 
-  # Giving the user session the same layout.
+  # Giving the user session monitors.xml.
   home-manager.users.${username}.home.file.".config/monitors.xml".source =
     monitorsXml;
 }
