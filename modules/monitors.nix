@@ -1,17 +1,9 @@
 # Generating GNOME's monitors.xml and giving it to both the login screen and
-# the user session.
+# user session.
 #
-# Mutter applies a stored <configuration> only when the set of connected
-# monitors exactly matches the set of <monitorspec>s in that configuration, and
-# a monitorspec includes the connector (DP-1, DP-3, ...) alongside the vendor,
-# product and serial. The kernel hands out connectors in the order monitors
-# turn up, so unplugging and re-plugging a monitor can move it from DP-2 to
-# DP-3. Mutter then recognises none of the stored configurations and falls back
-# to arranging every monitor in a left to right row.
-#
-# To make the layout stick we emit one <configuration> for every connector the
-# external monitors could be assigned to, so the layout is found again no
-# matter which port the monitors come back on.
+# Arranging laptop and 2 external monitors (one in portrait and one in
+# landscape) in a block with the portrait monitor on the bottom-left, the
+# laptop on the bottom right, and the landscape monitor on the top-right.
 
 { lib, pkgs, username, ... }:
 
@@ -20,8 +12,7 @@ let
   # /sys/class/drm.
   connectors = map (n: "DP-${toString n}") (lib.range 1 8);
 
-  # The laptop display. 2560x1600 at a scale of 1.6666... is 1536x960 logical
-  # pixels.
+  # Laptop display.
   laptop = {
     connector = "eDP-1";
     vendor = "BOE";
@@ -35,7 +26,7 @@ let
     primary = true;
   };
 
-  # The external monitor rotated into portrait, 1080x1920 logical pixels.
+  # External monitor in portrait.
   portrait = {
     vendor = "VSC";
     product = "VG2239 Series";
@@ -48,7 +39,7 @@ let
     primary = false;
   };
 
-  # The external monitor left in landscape, 1920x1080 logical pixels.
+  # External monitor in landscape.
   landscape = {
     vendor = "VSC";
     product = "VG2239 Series";
@@ -61,8 +52,8 @@ let
     primary = false;
   };
 
-  # Rendering a <logicalmonitor> that puts `monitor` on `connector` with its
-  # top left corner at logical coordinates (x, y). Returns a list of lines.
+  # Function that takes a monitor and puts its top-left corner at position
+  # (x, y).
   logicalMonitor = { x, y, connector, monitor }:
     [
       "    <logicalmonitor>"
