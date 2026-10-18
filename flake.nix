@@ -12,23 +12,20 @@
       system = "x86_64-linux";
       username = "scooke";
       fullName = "Sean Cooke";
-      monitorsXml = import ./modules/monitors.nix {
-        inherit (nixpkgs) lib;
-        pkgs = nixpkgs.legacyPackages.${system};
-      };
-      specialArgs = { inherit username fullName monitorsXml; };
+      specialArgs = { inherit username fullName; };
     in {
       nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [
           ./nixos/configuration.nix
           ./nixos/hardware-configuration.nix
+          ./modules/monitors.nix
           { networking.hostName = "laptop"; }
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit username monitorsXml; };
+            home-manager.extraSpecialArgs = { inherit username; };
             home-manager.users.${username} = import ./home-manager/home.nix;
           }
         ];

@@ -1,4 +1,5 @@
-# Generating GNOME's monitors.xml.
+# Generating GNOME's monitors.xml and giving it to both the login screen and
+# the user session.
 #
 # Mutter applies a stored <configuration> only when the set of connected
 # monitors exactly matches the set of <monitorspec>s in that configuration, and
@@ -12,7 +13,7 @@
 # external monitors could be assigned to, so the layout is found again no
 # matter which port the monitors come back on.
 
-{ lib, pkgs }:
+{ lib, pkgs, username, ... }:
 
 let
   # Connectors the external monitors can be assigned to, taken from
@@ -152,10 +153,22 @@ let
         (dockedLaptop { x = 1080; y = 1080; })
       ])
       connectorPairs;
+
+  monitorsXml = pkgs.writeText "monitors.xml" (lib.concatStringsSep "\n" (
+    [ ''<monitors version="2">'' ]
+    ++ lib.concatLists configurations
+    ++ [ "</monitors>" "" ]
+  ));
 in
 
-pkgs.writeText "monitors.xml" (lib.concatStringsSep "\n" (
-  [ ''<monitors version="2">'' ]
-  ++ lib.concatLists configurations
-  ++ [ "</monitors>" "" ]
-))
+{
+  # Giving the login screen the layout by linking the file into GDM's home.
+  systemd.tmpfiles.rules = [
+    "d /run/gdm/.config 0711 gdm gdm - -"
+    "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsXml}"
+  ];
+
+  # Giving the user session the same layout.
+  home-manager.users.${username}.home.file.".config/monitors.xml".source =
+    monitorsXml;
+}

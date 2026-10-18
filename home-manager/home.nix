@@ -1,4 +1,4 @@
-{ config, pkgs, lib, monitorsXml, username, ... }:
+{ config, pkgs, lib, username, ... }:
 
 let
   # Requiring git authentication from command line only.
@@ -112,9 +112,6 @@ in
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-
-    # Configuring displays.
-    ".config/monitors.xml".source = monitorsXml;
   };
 
   # Configuring Brave.
