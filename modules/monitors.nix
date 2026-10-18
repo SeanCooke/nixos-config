@@ -94,7 +94,8 @@ let
     ++ lib.concatMap logicalMonitor logicalMonitors
     ++ [ "  </configuration>" ];
 
-  # The laptop in the position it holds whenever an external is attached.
+  # laptop will be in every configuration.  Helper function below for putting
+  # the top-left corner of laptop at position (x, y).
   dockedLaptop = { x, y }: {
     inherit x y;
     inherit (laptop) connector;
@@ -116,7 +117,7 @@ let
     # The laptop on its own.
     [
       (configuration [
-        { x = 0; y = 0; connector = laptop.connector; monitor = laptop; }
+        (dockedLaptop { x = 0; y = 0; })
       ])
     ]
 
