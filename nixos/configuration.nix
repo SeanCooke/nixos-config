@@ -99,7 +99,7 @@ in
     # no need to redefine it in your config for now)
     #media-session.enable = true;
 
-    # Enable AirPods microphone and speaker.
+    # Enable AirPods speaker and microphone.
     wireplumber.extraConfig."51-bluetooth-narrowband-microphone" = {
       "monitor.bluez.properties" = {
         "bluez5.enable-lc3-a127" = false;
