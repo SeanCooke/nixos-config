@@ -98,6 +98,14 @@ in
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+
+    # Enable AirPods speaker and microphone.
+    wireplumber.extraConfig."51-bluetooth-narrowband-microphone" = {
+      "monitor.bluez.properties" = {
+        "bluez5.enable-lc3-a127" = false;
+        "bluez5.enable-msbc" = false;
+      };
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
