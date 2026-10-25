@@ -21,13 +21,16 @@ nix-shell -p git
 git clone https://github.com/SeanCooke/nixos-config
 ```
 
-2. Change into the repo and run [`install.sh`](https://github.com/SeanCooke/nixos-config/blob/main/install.sh). It replaces the tracked hardware scan, enables flakes, builds the system, and logs you out.
+2. Change into the repo and run [`install.sh`](https://github.com/SeanCooke/nixos-config/blob/main/install.sh). It replaces the tracked hardware scan, deletes `~/.zshrc` if it exists, enables flakes, builds the system, and logs you out.
 ```bash
 cd ~/nixos-config
 ./install.sh
 ```
 
-After logging back in, flakes are enabled system wide by `nixos/configuration.nix` and later rebuilds no longer need `NIX_CONFIG`.
+After logging back in, restart NetworkManager by running the command below.
+```bash
+sudo systemctl restart NetworkManager
+```
 
 ## Rebuild
 After editing any file in this repo.
