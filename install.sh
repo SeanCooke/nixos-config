@@ -15,7 +15,14 @@ EOF
 # Replace the tracked hardware scan with this machine's own.
 cp /etc/nixos/hardware-configuration.nix "$HOME/nixos-config/nixos/"
 
-# Enable flakes and rebuild.
+# Delete the original $HOME/.zshrc.
+if [ -f "$HOME/.zshrc" ] && [ ! -L "$HOME/.zshrc" ]; then
+  rm "$HOME/.zshrc"
+fi
+
+# Enable flakes and rebuild twice.
+sudo NIX_CONFIG="experimental-features = nix-command flakes" \
+  nixos-rebuild switch --flake "$HOME/nixos-config#laptop"
 sudo NIX_CONFIG="experimental-features = nix-command flakes" \
   nixos-rebuild switch --flake "$HOME/nixos-config#laptop"
 
